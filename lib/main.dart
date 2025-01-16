@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:koko_first_app/models/note_database.dart';
 import 'package:koko_first_app/pages/notes_page.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   // initialize the database
   WidgetsFlutterBinding.ensureInitialized();
   await NoteDatabase.initialize();
 
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => NoteDatabase(),
+      child: MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
